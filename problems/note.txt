@@ -1,0 +1,6 @@
+<<<<>>>>
+To get correct solution
+push every problem back to 
+the folder containing the 
+type of datastructure it has
+<<<<>>>
