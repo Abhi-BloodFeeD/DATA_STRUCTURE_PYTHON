@@ -1,111 +1,130 @@
 class Node():
-    def __init__(self):
+    def __init__(self,data):
         self.data = data
         self.next = None
 
 class LinkedList():
     def __init__(self):
-        self.head = None
-    
-    def append(self,data):
-        new_node = Node(data)
-        if self.head == None:
-            self.head = new_node
-            return
-        last_node = self.head
-        while last_node.next:
-            last_node = last_node.next
-        last_node.next = new_node
-    
-
-    def insert_after(self,previous_node,data):
-        if not previous_node:
-            print("Previous node not in node")
-            return
-        new_node = Node(data)
-        new_node.next = previous_node.next
-        previous_node.next = new_node
-   
-
-    def prepend(self,data):
-        new_node=Node(data)
-        new_node.next=self.head
-        self.head = new_node
-
+        self.head = None  
     def print_list(self):
         cur_node=self.head
         while cur_node:
             print(cur_node.data)
-            cur_node = cur_node.next
+            cur_node = cur_node.next 
+    def append(self,data):
+        new_node = Node(data)
+        
+        if self.head is None:
+            self.head = new_node
+            return
+        
+        last_node = self.head
+        while last_node.next:
+            last_node = last_node.next
+        last_node.next = new_node  
+    def insert_after(self,previous_node,data):
+        if not previous_node:
+            print("preVious node not in node")
+            return
+        new_node = Node(data)
+        new_node.next = previous_node.next
+        previous_node.next = new_node
+    def prepend(self,data):
+        new_node=Node(data)
+        new_node.next=self.head
+        self.head = new_node
     
     def deletion(self,data):
-        current_node = self.head
-        if data==self.head.data and current_node:
-            self.head = current_node.next
-            current_node = None
+        cur_node = self.head
+        if data==self.head.data and cur_node:
+            self.head = cur_node.next
+            cur_node = None
         prev_node = None
-        while not current_node.data == data or current_node:
-           prev_node = current_node
-           current_node = current_node.next
-        if current_node is None:
-            print("Node Not Present")
+        while not cur_node.data == data and cur_node:
+           prev_node = cur_node
+           cur_node = cur_node.next
+        if cur_node is None:
+            print("Node Not present")
             return 
         
-        prev_node.next = current_node.next
-        current_node = None
-
+        prev_node.next = cur_node.next
+        cur_node = None
     def deletion_position(self,delete_position):
         
-        current_node = self.head
+        cur_node = self.head
         if delete_position==0:
-            self.head = current_node.next
-            current_node = None
-
+            self.head = cur_node.next
+            cur_node = None
+            return
         position=1
         prev_node = None
-        while not position == delete_position or current_node:
-           prev_node = current_node
-           current_node = current_node.next
+        while position != delete_position and cur_node:
+           prev_node = cur_node
+           cur_node = cur_node.next
            position+=1
-        if current_node is None:
+        if cur_node is None:
             return 
-        
-        prev_node.next = current_node.next
-        current_node = None
-    
+        if prev_node==None:
+            self.head == cur_node.next
+            return
+        prev_node.next = cur_node.next
+        cur_node = None   
     def len_iterative(self):
-        current_node = self.head
+        cur_node = self.head
         count= 0
-        while current_node:
+        while cur_node:
             count+=1
-            current_node = current_node.next
+            cur_node = cur_node.next
         return count
     def len_recursive(self,head_node):
         if head_node is None:
             return 0
         return 1+self.len_recursive(head_node.next)
     def node_by_key(self,key):
-        cur_node = self.head
+        last_node = self.head
         pre_node = None
-        while cur_node or not cur_node.data == key:
-            pre_node = cur_node
-            cur_node = cur_node.next
-        return (pre_node,cur_node)
+        while last_node.next and last_node.data != key:
+            pre_node = last_node
+            last_node = last_node.next
+        return pre_node,last_node
     def swap_node(self,key1,key2):
-        pre_node_key1,cur_node_key1=self.node_by_key(key1)
-        pre_node_key2,cur_node_key2=self.node_by_key(key2)
-        if  not cur_node_key1 or not cur_node_key2:       
+        pre1,cur1=self.node_by_key(key1)
+        pre2,cur2=self.node_by_key(key2)
+        if  not cur1 or not cur2:       
             return
         
-        # SWAPPING PREVIOUS NODE POINTER
-        if pre_node_key1:                         # CHecking if pre node exist
-            pre_node_key1.next = cur_node_key2         
-        else:                                     # Previous node for key1 is not present
-            self.head = cur_node_key2   
-        if pre_node_key2:                         # CHecking if pre node exist           
-            pre_node_key2 = cur_node_key1
-        else:                                     # Previous node for key2 is not present
-            self.head = cur_node_key1
+        # SWAPPING preV NODE POINTER
+        if pre1:                         # CHecking if pre node exist
+            pre1.next = cur2         
+        else:                                     # preV node for key1 is not present
+            self.head = cur2   
+        if pre2:                         # CHecking if pre node exist           
+            pre2 = cur1
+        else:                                     # preV node for key2 is not present
+            self.head = cur1
        
-        # SWAPPING CURRENT NODE KEYS
-        cur_node_key1.next,cur_node_key2.next = cur_node_key2.next,cur_node_key1.next
+        # SWAPPING cur NODE KEYS
+        cur1.next,cur2.next = cur2.next,cur1.next
+    def reverse_list(self):
+        preV = None
+        cur = self.head
+        while cur:
+            nxt = cur.next
+            cur.next = preV
+            preV = cur
+            cur = nxt
+        self.head = preV
+            
+            
+llist=LinkedList()
+llist.append("A")
+llist.insert_after(llist.head,"B")
+llist.prepend("ZZ")
+llist.append("F")
+llist.append("G")
+
+
+llist.print_list()
+llist.deletion("A")
+llist.deletion_position(1)
+llist.print_list()
