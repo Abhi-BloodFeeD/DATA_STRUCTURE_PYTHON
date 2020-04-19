@@ -166,6 +166,15 @@ class LinkedList():
         n=self.len_iterative()     
         value = self.node_by_location(n-q)
         return value
+    def count_occurrence(self,data):
+            cur = self.head
+            count = 0
+            while cur:
+                if cur.data == data:
+                    count+=1
+                cur = cur.next
+            return count
+
 
 
 
