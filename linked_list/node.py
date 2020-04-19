@@ -116,15 +116,3 @@ class LinkedList():
         self.head = preV
             
             
-llist=LinkedList()
-llist.append("A")
-llist.insert_after(llist.head,"B")
-llist.prepend("ZZ")
-llist.append("F")
-llist.append("G")
-
-
-llist.print_list()
-llist.deletion("A")
-llist.deletion_position(1)
-llist.print_list()
