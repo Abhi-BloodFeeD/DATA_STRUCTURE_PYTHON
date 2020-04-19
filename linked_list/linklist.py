@@ -143,3 +143,29 @@ class LinkedList():
         if not q:
             s.next = p
         return new_head
+    def duplicate_remove(self):
+        arr=[]
+        run = self.head
+        previous=None
+        while run :
+            if run.data in arr:
+                previous.next = run.next
+                run = None
+            else:
+                arr.append(run.data)
+                previous = run
+            run = previous.next
+    def node_by_location(self,num):
+        cur = self.head
+        count = 0
+        while count != num and cur:
+            cur = cur.next
+            count+=1
+        return cur.data
+    def nth_from_last(self,q):
+        n=self.len_iterative()     
+        value = self.node_by_location(n-q)
+        return value
+
+
+
