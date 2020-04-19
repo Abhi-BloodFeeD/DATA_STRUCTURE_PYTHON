@@ -16,7 +16,27 @@ class LinkedList():
         last_node = self.head
         while last_node.next:
             last_node = last_node.next
+<<<<<<< HEAD
         last_node.next = new_node  
+=======
+        last_node.next = new_node
+    
+
+    def insert_after(self,previous_node,data):
+        if not previous_node:
+            print("Previous node not in node")
+            return
+        new_node = Node(data)
+        new_node.next = previous_node.next
+        previous_node.next = new_node
+   
+
+    def prepend(self,data):
+        new_node=Node(data)
+        new_node.next=self.head
+        self.head = new_node
+
+>>>>>>> a1afb2948d80e9d3e5d761a7b871ffa99ef580b5
     def print_list(self):
         cur_node=self.head
         while cur_node:
