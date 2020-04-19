@@ -24,7 +24,7 @@ class LinkedList():
         last_node.next = new_node  
     def insert_after(self,previous_node,data):
         if not previous_node:
-            print("preVious node not in node")
+            print("previous node not in node")
             return
         new_node = Node(data)
         new_node.next = previous_node.next
@@ -93,26 +93,24 @@ class LinkedList():
         if  not cur1 or not cur2:       
             return
         
-        # SWAPPING preV NODE POINTER
+        # SWAPPING prev NODE POINTER
         if pre1:                         # CHecking if pre node exist
             pre1.next = cur2         
-        else:                                     # preV node for key1 is not present
+        else:                                     # prev node for key1 is not present
             self.head = cur2   
         if pre2:                         # CHecking if pre node exist           
             pre2 = cur1
-        else:                                     # preV node for key2 is not present
+        else:                                     # prev node for key2 is not present
             self.head = cur1
        
         # SWAPPING cur NODE KEYS
         cur1.next,cur2.next = cur2.next,cur1.next
     def reverse_list(self):
-        preV = None
+        prev = None
         cur = self.head
         while cur:
             nxt = cur.next
-            cur.next = preV
-            preV = cur
+            cur.next = prev
+            prev = cur
             cur = nxt
-        self.head = preV
-            
-            
+        self.head = prev
