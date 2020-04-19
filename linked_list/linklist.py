@@ -32,8 +32,7 @@ class LinkedList():
     def prepend(self,data):
         new_node=Node(data)
         new_node.next=self.head
-        self.head = new_node
-    
+        self.head = new_node    
     def deletion(self,data):
         cur_node = self.head
         if data==self.head.data and cur_node:
@@ -114,3 +113,33 @@ class LinkedList():
             prev = cur
             cur = nxt
         self.head = prev
+    def merge_sorted(self,llist):
+        p=self.head
+        q=llist.head
+        s = None
+        if not p:
+            return q
+        if not q:
+            return p
+        if p and q :
+            if p.data <= q.data:
+                s = p
+                p = s.next
+            else:
+                s = q
+                q = s.next
+            new_head = s
+        while p and q:
+            if p.data <= q.data:
+                s.next = p
+                s=p
+                p=s.next                
+            else :
+                s.next = q
+                s = q
+                q = s.next
+        if not p:
+            s.next = q
+        if not q:
+            s.next = p
+        return new_head
