@@ -15,3 +15,6 @@ def palindrome(linked_list):
         else:
             return False    
     return True
+
+
+            
