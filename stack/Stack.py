@@ -19,3 +19,6 @@ class Stack():
     def peek(self):
         if not self.is_empty():
             return self.items[-1]
+    
+    def stack_len(self):
+        return len(self.items)
